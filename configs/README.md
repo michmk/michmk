@@ -8,4 +8,8 @@ More features in ZSH shell [GitHub: Oh My Zsh](https://github.com/ohmyzsh/ohmyzs
 
 Theme for the shell [GitHub: powerlevel10k](https://github.com/romkatv/powerlevel10k)
 
+Auto suggestions: [GitHub: zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+
+Syntaxt highlighting: [Github: zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+
 Configuration file for powerlevel10k is [here](p10k.zsh). Put it in `~/.p10k.zsh`
