@@ -10,6 +10,7 @@ with `/<skill-name>`.
 | Skill | What it does |
 |---|---|
 | [`document-changes`](document-changes/SKILL.md) | Documents a set of git changes. It writes and repairs comments, docstrings, and prose docs, and it removes the comment noise that AI-assisted editing leaves behind. The prose follows ASD-STE100 Simplified Technical English. |
+| [`code-review`](code-review/SKILL.md) | Reviews a set of git changes as a senior engineer. It summarises the change, gives a short verdict, and lists blockers, warnings, and nits in one table. It looks for silent failures and AI slop. It reports only; it does not edit code. |
 
 ## Install
 

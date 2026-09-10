@@ -1,20 +1,52 @@
 ---
 name: code-review
-description: Review a set of git changes as a senior engineer would. Summarises the change, gives a short verdict, and lists blockers, warnings, and nits in one table. Use when the user asks for a code review, to review a branch or PR or diff, to check changes before merge, to look for silent failures, or to check work for AI slop. Language-agnostic. Reports only; it does not edit code.
+description: Review a set of git changes as a senior engineer would. Summarises the change, gives a short verdict, and lists blockers, warnings, and nits in one table. Use when the user asks for a code review, to review a branch or PR or diff, to check changes before merge, to look for silent failures, or to check work for AI slop. Language-agnostic and read-only: it reads the repo and changes no code, no files, and no git state, so it is safe to run unattended in auto mode. The only thing it writes is the review file.
 ---
 
-# Review changes
+# Code review
 
 Read a diff, understand what it tries to do, say whether it is a good change,
 and list only the problems that are real.
 
 One deliverable: a review. Header, assessment, findings table. Nothing else.
 
+## Permissions
+
+This skill is read-only. It is safe to run unattended, in auto mode, or on a
+branch you care about. It cannot lose your work.
+
+**It reads.** `git diff`, `git log`, `git show`, `git status`, `git merge-base`,
+`git branch`, `git rev-parse`, `git remote show`, and reads of files in the
+working tree with `cat`, `sed -n`, `rg`, `grep`, and `find`.
+
+**It writes exactly one thing.** The review file at
+`.claude/reviews/<branch>-<YYYY-MM-DD>.md`, plus the directory that holds it.
+Nothing else on disk is created, edited, moved, or deleted.
+
+**It never does any of this**, even when a finding looks trivial to fix and
+even when the user seems to want it:
+
+| Never | Includes |
+|---|---|
+| Edit source code | No fixes, no refactors, no formatting, no import sorting |
+| Change git state | No `add`, `commit`, `checkout`, `switch`, `stash`, `restore`, `reset`, `merge`, `rebase`, `cherry-pick`, `clean`, `branch -d`, `tag` |
+| Touch a remote | No `push`, `pull`, `fetch`, no `gh pr` write commands, no API calls that post |
+| Run the project | No builds, test suites, formatters, migrations, installers, or package managers |
+| Delete or move files | Nothing outside the one review file it writes |
+| Reach the network | Reviewing is reading the diff you already have |
+
+A finding that needs a command to confirm is either confirmed by reading, or
+written as an open question in the Issue column. Never run the command.
+
+If the user asks for the fixes to be applied, stop and say the review is
+report-only, then let them start a normal editing turn. Do not apply them
+inside this skill.
+
 ## Core rules
 
 **Report only. Never edit.** No fixes, no refactors, no formatting, no "while I
-was here". The user acts on the review. The single exception is the review file
-itself.
+was here". The user acts on the review. See **Permissions** above for the full
+boundary; the review file is the one exception.
 
 **Silence is a valid result.** A clean change gets an empty findings table and a
 short assessment. Do not manufacture a finding to prove you looked. A review
