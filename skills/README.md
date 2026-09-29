@@ -11,6 +11,7 @@ with `/<skill-name>`.
 |---|---|
 | [`document-changes`](document-changes/SKILL.md) | Documents a set of git changes. It writes and repairs comments, docstrings, and prose docs, and it removes the comment noise that AI-assisted editing leaves behind. The prose follows ASD-STE100 Simplified Technical English. |
 | [`code-review`](code-review/SKILL.md) | Reviews a set of git changes as a senior engineer. It summarises the change, gives a short verdict, and lists blockers, warnings, and nits in one table. It looks for silent failures and AI slop. It reports only; it does not edit code. |
+| [`html-docs`](html-docs/SKILL.md) | Sets the style and structure rules for standalone HTML documents: proposals, comparisons, analyses, walkthroughs, and research. Every document starts from one template, so all documents look the same. Each one has a dated header with sources, a contents panel, diagrams with labelled arrows, status marks, and stable IDs. |
 
 ## Install
 

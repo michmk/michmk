@@ -1,0 +1,268 @@
+<!doctype html>
+<!--
+  html-docs template (Paper style).
+  Copy this file, then replace the content inside <body>.
+  Do not edit the <style> or <script> blocks.
+  Each component below has one example. Copy the ones you need, delete the rest.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{Title}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#fbfaf7;--fg:#1f1e1c;--muted:#6f6b64;--rule:#e4e0d8;--accent:#2f4f8f;--ok:#2e7d4f;--bad:#b3261e;--warn:#a86a00;--hl:#f3e7c4;
+--node-bg:#fff;--node-stroke:#bdb7ab;--edge:#6f6b64;--code-bg:#f2efe8;
+--font-body:Inter,system-ui,sans-serif;--font-head:"Source Serif 4",Georgia,serif;--font-mono:"JetBrains Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1b1a18;--fg:#ebe7df;--muted:#a19b90;--rule:#34312c;--accent:#9db4e6;--ok:#6fc28f;--bad:#f08a80;--warn:#e0b050;--hl:#4a3f20;--node-bg:#24221f;--node-stroke:#5a554c;--edge:#a19b90;--code-bg:#24221f}}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 var(--font-body)}
+a{color:var(--accent)}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:56px;max-width:1120px;margin:0 auto;padding:48px 32px}
+.toc{position:sticky;top:32px;align-self:start;max-height:calc(100vh - 64px);overflow:auto;font-size:14px}
+.toc ol{list-style:none;margin:0 0 28px;padding:0}
+.toc a{display:block;text-decoration:none;color:var(--muted);padding:4px 10px;border-left:2px solid transparent}
+.toc a:hover{color:var(--fg)}
+.toc a.active{color:var(--fg);border-left-color:var(--accent);font-weight:500}
+.toc ol ol{margin:0 0 4px}
+.toc ol ol a{font-size:13px;padding:2px 10px 2px 24px}
+.toc ol ol a.active{font-weight:400;border-left-color:var(--rule)}
+.toc-title{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;padding:0 10px}
+.legend{font-size:13px;color:var(--muted);margin-bottom:20px}
+.legend>div:not(.toc-title){padding:3px 10px;display:flex;gap:8px;align-items:center}
+.legend code{color:var(--accent)}
+.doc{max-width:760px;min-width:0}
+h1,h2,h3{font-family:var(--font-head);font-weight:600}
+h1{font-size:40px;letter-spacing:-.01em;margin:6px 0 10px;line-height:1.15}
+h2{font-size:26px;margin:0 0 16px;line-height:1.25}
+h3{font-size:19px;margin:28px 0 8px;scroll-margin-top:24px}
+section{scroll-margin-top:24px;margin:0 0 56px}
+.num{color:var(--muted);font-weight:400;margin-right:12px}
+.doc-type{font:500 12px var(--font-body);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.doc-head{border-bottom:1px solid var(--rule);padding-bottom:28px;margin-bottom:40px}
+.subtitle{margin:0 0 20px;color:var(--muted);font-size:18px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 28px;margin:0 0 16px;font-size:14px}
+.meta div{display:flex;gap:8px}
+.meta dt{color:var(--muted)}
+.meta dd{margin:0}
+.sources{font-size:14px}
+.sources-label{color:var(--muted);margin-bottom:4px}
+.sources ol{margin:0;padding-left:22px}
+.sources li{scroll-margin-top:24px}
+.sources li:target{background:var(--hl)}
+.cite{font-size:.8em;vertical-align:super;line-height:0;text-decoration:none;margin-left:1px}
+.item{margin:0 0 14px}
+.item-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.item p{margin:4px 0 0}
+.ref{scroll-margin-top:24px;text-decoration:none;white-space:nowrap;font:500 12px var(--font-mono);color:var(--accent);padding:1px 0;border-bottom:1px dotted var(--accent)}
+.ref.flash{animation:flash 1.2s ease}
+@keyframes flash{0%{background:var(--hl)}100%{background:transparent}}
+.xref{white-space:nowrap}
+.st{display:inline-flex;align-items:center;justify-content:center;flex:none;vertical-align:-2px;width:18px;height:18px;border-radius:50%;border:1.5px solid currentColor;font:700 11px/1 var(--font-body)}
+.st.ok{color:var(--ok)}.st.ok::before{content:"✓"}
+.st.bad{color:var(--bad)}.st.bad::before{content:"✕"}
+.st.warn{color:var(--warn)}.st.warn::before{content:"!"}
+.callout{margin:20px 0;border-left:3px solid var(--accent);padding:4px 0 4px 16px;font-style:italic}
+.callout.warn{border-left-color:var(--warn)}
+.callout strong{font-style:normal}
+figure{margin:24px 0}
+.diagram svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--muted);margin-top:10px}
+.fig{font-weight:600;color:var(--fg);margin-right:6px}
+.node rect{fill:var(--node-bg);stroke:var(--node-stroke);stroke-width:1.2}
+.node text{fill:var(--fg);font:500 14px var(--font-body);text-anchor:middle;dominant-baseline:middle}
+.node text.sub{font-size:12px;fill:var(--muted);font-weight:400}
+.node.bad rect{stroke:var(--bad);stroke-dasharray:5 4;stroke-width:1.5}
+.node.accent rect{stroke:var(--accent);stroke-width:1.5}
+.node.group rect{fill:none;stroke:var(--node-stroke);stroke-dasharray:3 4}
+.node .group-label{font-size:12px;fill:var(--muted)}
+.node-tag{fill:var(--bad);font:600 11px var(--font-mono);text-anchor:middle}
+.edge{fill:none;stroke:var(--edge);stroke-width:1.4}
+.edge.dashed{stroke-dasharray:5 4}
+.arrowhead{fill:var(--edge)}
+.edge-label{fill:var(--fg);font:12px var(--font-mono);text-anchor:middle;paint-order:stroke;stroke:var(--bg);stroke-width:5px;stroke-linejoin:round}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:10px 12px;vertical-align:top}
+th{font-weight:600;border-bottom:1.5px solid var(--fg)}
+td{border-bottom:1px solid var(--rule)}
+th .ref{margin-right:4px}
+td .st{margin-right:6px}
+code{font:0.88em var(--font-mono)}
+pre{overflow-x:auto;padding:14px 16px;font-size:13px;line-height:1.55;background:var(--code-bg);border-radius:4px}
+pre code{font-size:inherit}
+.doc-foot{font-size:13px;color:var(--muted);padding-top:20px;border-top:1px solid var(--rule)}
+.copied-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--fg);color:var(--bg);font:13px var(--font-body);padding:6px 12px;border-radius:6px;opacity:0;transition:opacity .2s;pointer-events:none}
+.copied-toast.show{opacity:1}
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr;gap:24px;padding:24px 16px}
+  .toc{position:static;max-height:none;border-bottom:1px solid var(--rule);padding-bottom:16px}
+  .toc ol{columns:2;margin-bottom:12px}
+  .toc ol ol{display:none}
+  .legend{display:none}
+  h1{font-size:32px}
+}
+@media print{
+  .toc{display:none}
+  .layout{display:block;padding:0}
+  section{break-inside:avoid-page}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- CONTENTS: one link per <section>, same order, same text as the h2 (without the number).
+     A section with 2 or more h3 gets a nested <ol> with one link per h3. -->
+<nav class="toc" aria-label="Contents">
+  <div class="toc-title">Contents</div>
+  <ol>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#section-2">{{Section 2}}</a>
+      <ol>
+        <li><a href="#section-2-findings">{{Sub-part A}}</a></li>
+        <li><a href="#section-2-comparison">{{Sub-part B}}</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <!-- LEGEND: list only the status marks and ID prefixes this document uses. -->
+  <div class="legend">
+    <div class="toc-title">Legend</div>
+    <div><span class="st ok" role="img" aria-label="Correct"></span> Correct / meets need</div>
+    <div><span class="st bad" role="img" aria-label="Wrong"></span> Wrong / fails need</div>
+    <div><span class="st warn" role="img" aria-label="Warning"></span> Warning / trade-off</div>
+  </div>
+  <div class="legend">
+    <div class="toc-title">IDs</div>
+    <div><code>F-</code> Finding</div>
+    <div><code>Q-</code> Open question</div>
+  </div>
+</nav>
+
+<main class="doc">
+
+<!-- HEADER: type, title, subtitle, meta (Date required), sources. -->
+<header class="doc-head">
+  <div class="doc-type">{{Proposal | Analysis | Comparison | Walkthrough | Research | Report}}</div>
+  <h1>{{Title}}</h1>
+  <p class="subtitle">{{One sentence: what this document answers or proposes.}}</p>
+  <dl class="meta">
+    <div><dt>Date</dt><dd><time datetime="{{YYYY-MM-DD}}">{{D Mon YYYY}}</time></dd></div>
+    <div><dt>Author</dt><dd>{{Author}}</dd></div>
+    <div><dt>Status</dt><dd>{{Draft | Final}}</dd></div>
+  </dl>
+  <!-- SOURCES: numbered. Each <li> has id="src-N". Cite in text with <a class="cite" href="#src-N">[N]</a>. -->
+  <div class="sources">
+    <div class="sources-label">Sources</div>
+    <ol>
+      <li id="src-1">{{Author}}, <a href="{{https://…}}">{{Title}}</a>, {{Publisher}}, {{Year}}. Accessed {{YYYY-MM-DD}}.</li>
+    </ol>
+  </div>
+</header>
+
+<!-- SECTION: id matches the contents link. h2 starts with <span class="num">N</span>. -->
+<section id="summary">
+  <h2><span class="num">1</span>Summary</h2>
+  <p>{{Direct answer first, in 2–4 sentences.}} A fact from a source.<a class="cite" href="#src-1">[1]</a></p>
+
+  <!-- CALLOUT: at most one per section. Use .note for the key takeaway, .warn for a caution. -->
+  <aside class="callout note"><strong>Recommendation.</strong> {{One or two sentences.}}</aside>
+</section>
+
+<section id="section-2">
+  <h2><span class="num">2</span>{{Section 2}}</h2>
+
+  <!-- SUB-HEADING: h3 with an id "<section-id>-<slug>". Listed in contents only when the section has 2 or more. -->
+  <h3 id="section-2-findings">{{Sub-part A}}</h3>
+
+  <!-- ID'D ITEM: for anything that will be referenced later. The status mark is optional. -->
+  <div class="item">
+    <div class="item-head"><a class="ref" id="F-01" href="#F-01">F-01</a><span class="st ok" role="img" aria-label="Correct"></span><strong>{{Short title}}</strong></div>
+    <p>{{One to three sentences.}}</p>
+  </div>
+  <div class="item">
+    <div class="item-head"><a class="ref" id="Q-01" href="#Q-01">Q-01</a><strong>{{Question?}}</strong></div>
+    <p>{{Why it matters.}} Related: <a class="xref" href="#F-01">F-01</a>.</p>
+  </div>
+
+  <!-- CROSS-REFERENCE in running text: <a class="xref" href="#F-01">F-01</a> -->
+
+  <h3 id="section-2-comparison">{{Sub-part B}}</h3>
+
+  <!-- TABLE: IDs go in the header cells when columns are options. Status mark + short text in cells. -->
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Criterion</th><th><a class="ref" id="O-A" href="#O-A">O-A</a> {{Option}}</th><th><a class="ref" id="O-B" href="#O-B">O-B</a> {{Option}}</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>{{Criterion}}</td><td><span class="st ok" role="img" aria-label="Correct"></span> {{Yes}}</td><td><span class="st bad" role="img" aria-label="Wrong"></span> {{No}}</td></tr>
+      <tr><td>{{Criterion}}</td><td><span class="st warn" role="img" aria-label="Warning"></span> {{Partly}}</td><td><span class="st ok" role="img" aria-label="Correct"></span> {{Yes}}</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- DIAGRAM: inline SVG. Give each <marker> an id unique in the page (arr1, arr2, …).
+       Nodes: <g class="node"> (+ .bad failure point, .accent focus, .group container).
+       Edges: <path class="edge"> (+ .dashed for async / return / optional). Every edge has an .edge-label. -->
+  <figure class="diagram">
+    <svg viewBox="0 0 560 140" role="img" aria-label="{{Text description of the diagram}}">
+      <defs>
+        <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arrowhead" d="M0,0 L10,5 L0,10 z"/></marker>
+      </defs>
+      <g class="node"><rect x="10" y="45" width="120" height="50" rx="6"/><text x="70" y="70">{{Input}}</text></g>
+      <g class="node accent"><rect x="220" y="45" width="120" height="50" rx="6"/><text x="280" y="70">{{Process}}</text></g>
+      <g class="node"><rect x="430" y="45" width="120" height="50" rx="6"/><text x="490" y="70">{{Output}}</text></g>
+      <path class="edge" d="M130,70 L216,70" marker-end="url(#arr1)"/>
+      <text class="edge-label" x="175" y="60">1 {{label}}</text>
+      <path class="edge" d="M340,70 L426,70" marker-end="url(#arr1)"/>
+      <text class="edge-label" x="385" y="60">2 {{label}}</text>
+    </svg>
+    <figcaption><span class="fig">Fig. 1</span> {{What the diagram shows, in one sentence.}}</figcaption>
+  </figure>
+
+  <!-- CODE -->
+<pre><code>{{code}}</code></pre>
+</section>
+
+<footer class="doc-foot">{{YYYY-MM-DD}} · IDs are stable: link as <code>#F-01</code></footer>
+</main>
+</div>
+
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  function spy(){
+    var idx=0;
+    secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<=120)idx=i});
+    if(window.innerHeight+window.scrollY>=document.body.scrollHeight-4)idx=secs.length-1;
+    links.forEach(function(a){a.classList.remove('active')});
+    var cur=links[idx];if(!cur)return;
+    cur.classList.add('active');
+    var parent=cur.parentElement.parentElement.closest('li');
+    if(parent)parent.firstElementChild.classList.add('active');
+  }
+  window.addEventListener('scroll',spy,{passive:true});spy();
+  var toast=document.createElement('div');toast.className='copied-toast';document.body.appendChild(toast);
+  document.querySelectorAll('.ref').forEach(function(r){
+    r.title='Click to copy link';
+    r.addEventListener('click',function(){
+      var url=location.href.split('#')[0]+'#'+r.id;
+      try{navigator.clipboard.writeText(url)}catch(e){}
+      toast.textContent='Copied link to '+r.id;toast.classList.add('show');
+      setTimeout(function(){toast.classList.remove('show')},1200);
+    });
+  });
+  function flash(){var t=location.hash&&document.getElementById(location.hash.slice(1));
+    if(t&&t.classList.contains('ref')){t.classList.remove('flash');void t.offsetWidth;t.classList.add('flash')}}
+  window.addEventListener('hashchange',flash);flash();
+})();
+</script>
+</body>
+</html>
