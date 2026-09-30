@@ -1,6 +1,6 @@
 ---
 name: html-docs
-description: Style and structure rules for standalone HTML documents such as walkthroughs, comparisons, proposals, designs, analyses, research write-ups, and university assignments. Every document gets the same look (the "Paper" style), a left contents panel, a dated header with sources, diagrams with labelled arrows, status marks, and stable IDs for later reference. Use when the user asks for an HTML doc, report, write-up, comparison, proposal, design doc, walkthrough, analysis, or research summary as a page or file.
+description: Style and structure rules for standalone HTML documents such as walkthroughs, comparisons, proposals, designs, analyses, and research write-ups. Every document gets the same look (the "Paper" style), a left contents panel, a dated header with sources, diagrams with labelled arrows, status marks, and stable IDs for later reference. Use when the user asks for an HTML doc, report, write-up, comparison, proposal, design doc, walkthrough, analysis, or research summary as a page or file.
 ---
 
 # HTML docs
@@ -44,14 +44,13 @@ lists of options. The text shouldn't be overwhelming.
 | Type | One word: Proposal, Analysis, Comparison, Walkthrough, Research, Report, or another word that fits. |
 | Title | A short noun phrase. No trailing period. |
 | Subtitle | One sentence that says what the document answers or proposes. |
-| Meta | `Date` is required, in ISO form in `datetime`. Add `Author` and `Status` when known. You can add other short fields, such as `Course` or `Version`. |
+| Meta | `Date` is required, in ISO form in `datetime`. Add `Author` and `Status` when known. You can add other short fields, such as `Version`. |
 | Sources | A numbered list. Each item has `id="src-N"`. If there are no sources, write "None: based on the author's own analysis." |
 
 **Contents panel.** It has one link per `<section>`, in the same order, with
 the same text as the `h2`, but without the number. When a section has 2 or
 more `h3`, put a nested `<ol>` under its link, with one link per `h3`. When a
-section has only one `h3`, do not list it. Below the links, the legend shows
-only the status marks and ID prefixes that the document uses.
+section has only one `h3`, do not list it.
 
 **Sections.** Number the sections in order. The first section is always
 `Summary`, and it gives the direct answer. Use `h3` for sub-parts inside a
@@ -105,20 +104,6 @@ paragraphs.
 **Format.** `PREFIX-NN`: an uppercase prefix, a hyphen, and two digits
 (`F-01`). For options, use a letter (`O-A`, `O-B`). The anchor `id` is the
 same as the visible text.
-
-**Prefixes.** Choose the prefixes that fit the document, and list them in the
-legend. Common prefixes:
-
-| Prefix | Use for | Prefix | Use for |
-|---|---|---|---|
-| `F-` | Finding, fact | `R-` | Risk |
-| `P-` | Problem | `D-` | Decision |
-| `O-` | Option | `Q-` | Open question |
-| `S-` | Step | `A-` | Action, task |
-| `C-` | Concept, definition | `H-` | Hypothesis, claim |
-
-If nothing fits, make a new one-letter prefix and add it to the legend. Do not
-use the same prefix for two meanings in one document.
 
 **Stability.** Number IDs in the order they appear, per prefix. After the
 document is shared, never renumber or reuse an ID. Add new items at the next
